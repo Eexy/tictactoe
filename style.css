@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+}
+
+html, body{
+    height: 100%;
+}
+
+.board{
+    display: grid;
+    grid-template-rows: repeat(3, 50px);
+    grid-template-columns: repeat(3, 50px);
+}
+
+.board-cell{
+    display: block;
+}
