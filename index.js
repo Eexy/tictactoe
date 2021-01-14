@@ -1,13 +1,16 @@
 const board = document.querySelector('.board');
 const cells = document.querySelectorAll('.board-cell');
-const winner = document.querySelector('.winner-name');
-const resetBtn = document.querySelector('.reset');
+const winner = document.querySelector('.winner-pawn');
+const resetBtn = document.querySelectorAll('.reset');
+const pawn = ['circle.svg', 'cross.svg'];
 let ar = Array(9).fill(-1);
 let player = true;
 let isWin = false;
 let draw = false;
 
-resetBtn.addEventListener('click', reset);
+resetBtn.forEach(btn => {
+    btn.addEventListener('click', reset);
+})
 
 cells.forEach(cell => {
     cell.addEventListener('click', play);
@@ -16,12 +19,10 @@ cells.forEach(cell => {
 function play(e) {
     const cell = e.target;
     if (isEmpty(cell)) {
-        if (player === true) {
-            cell.textContent = 'x';
-        } else {
-            cell.textContent = 'o';
-        }
-
+        const pawnImg = document.createElement('img');
+        pawnImg.setAttribute('src', `img/${pawn[Number(player)]}`);
+        pawnImg.classList.add('pawn');
+        cell.appendChild(pawnImg);
         const cellNumber = parseInt(cell.getAttribute('data-cell-number'));
         ar[cellNumber] = Number(player);
 
@@ -43,10 +44,15 @@ function checkBoard(cellNumber) {
     checkWin(cellNumber);
     checkDraw();
 
-
+    // const winnerPawn = document.createElement('img');
     if (isWin || draw) {
-        winner.textContent = (isWin) ? Number(player) : -1;
+        if(isWin){
+            winner.setAttribute('src', `img/${pawn[Number(player)]}`);
+        }else{
+            winner.setAttribute('src', `img/equal.svg`);
+        }
         stopGame();
+        showModal();
     }
 }
 
@@ -122,4 +128,18 @@ function reset() {
     player = true;
 
     winner.textContent = '';
+}
+
+const modal = document.querySelector('.modal');
+const closeModalBtn = document.querySelector('.close-modal-btn');
+closeModalBtn.addEventListener('click', closeModal);
+
+// close modal
+function closeModal(){
+    modal.style.transform = 'translateY(-1000%)';
+}
+
+// show modal
+function showModal(){
+    modal.style.transform = 'translateY(0%)';
 }

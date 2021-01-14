@@ -4,14 +4,110 @@
 
 html, body{
     height: 100%;
+    background:#000128;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white; 
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.modal{
+    position: absolute;
+    background: white;
+    min-height: 37vh;
+    width: 90vw;
+    border-radius: 0.2rem;
+    padding: 0.3rem;
+    color: black;
+    transform: translateY(-1000%);
+    transition: transform 0.3s;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.close-modal-btn{
+    display: block;
+    font-size: 1.5rem;
+    border: none;
+    padding: none;
+    background: none;
+}
+
+.game-wrapper{
+    display: flex;
+    flex-direction: column;
 }
 
 .board{
     display: grid;
-    grid-template-rows: repeat(3, 50px);
-    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(3, 80px);
+    grid-template-columns: repeat(3, 80px);
+    gap: 0.5rem;
+    padding: 1rem 0;
 }
 
 .board-cell{
     display: block;
+    border-radius: 0.3rem;
+    background:#02123c;
+    border: none;
+}
+
+
+.pawn{
+    height: 80%;
+    width: 80%;    
+}
+
+button{
+    cursor: pointer;
+    outline: none;
+}
+
+.winner{
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.reset{
+    display: block;
+    border-radius: 0.3rem;
+    border: none;
+    background: #f6a151;
+    padding: 0.8rem 1rem;
+    font-size: 1.01rem;
+    color: white;
+    text-transform: capitalize;
+}
+
+.winner-pawn{
+    height: 120px;
+    width: 120px;
+    padding: 2rem 0;
+}
+
+@media screen and (min-width: 530px){
+    .modal{
+        width: 500px;
+    }
 }
