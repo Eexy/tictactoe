@@ -117,6 +117,7 @@ function isEmpty(cell) {
 
 // reset game
 function reset() {
+    closeModal();
     cells.forEach((cell) => {
         cell.textContent = '';
         cell.addEventListener('click', play);
