@@ -22,7 +22,7 @@ body {
 }
 
 .homepage {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
@@ -95,6 +95,51 @@ button {
 .top-right {
   top: -40%;
   right: -20%;
+}
+
+.pawnpage {
+  padding: 1rem;
+  display: none;
+  flex-direction: column;
+}
+
+h2 {
+  font-weight: normal;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.pawn-selectors {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 1.5rem 0;
+}
+
+.pawn-selector {
+  display: flex;
+  background: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.previous-link {
+  position: absolute;
+  text-decoration: none;
+  color: white;
+}
+
+#circle-selector {
+  margin-right: 2rem;
+}
+
+#cross-selector {
+  margin-left: 2rem;
+}
+
+.pawn-selector img {
+  height: 400px;
 }
 
 .modal {
