@@ -14,6 +14,11 @@ body{
   overflow: hidden;
 }
 
+main{
+  transform: translateY(0%);
+  transition: transform 0.3s;
+}
+
 .page{
   height: 100vh;
   overflow: hidden;
@@ -22,7 +27,7 @@ body{
 }
 
 .homepage{
-  display: none;
+  display: flex;
   flex-direction: column;
 
   align-items: center;
@@ -100,8 +105,9 @@ button{
 }
 
 .pawnpage{
-  padding: 1rem;
-  display: none;
+  position: relative;
+  padding-top: 1rem;
+  display: flex;
   flex-direction: column;
 }
 
@@ -132,6 +138,11 @@ h2{
   color: white;
   top: 1rem;
   left: 1rem;
+  background: rgb(6, 106, 221);
+
+  &:hover{
+    background: lighten(rgb(6, 106, 221), 10%);
+  }
 }
 
 #circle-selector{
@@ -208,6 +219,7 @@ h2{
   border-radius: 0.3rem;
   background:darken(#062E96, 10%);
   border: none;
+  padding: 0.2rem;
 }
 
 

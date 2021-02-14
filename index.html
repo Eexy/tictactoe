@@ -8,86 +8,90 @@
   </head>
 
   <body>
-    <div class="page homepage">
-      <img
-        src="/img/circle__background.svg"
-        class="background-illustration bottom-left"
-        alt=""
-        srcset=""
-      />
-      <img
-        src="/img/circle__background.svg "
-        class="background-illustration top-right"
-        alt=""
-        srcset=""
-      />
-      <img
-        src="/img/cross__background.svg"
-        class="background-illustration top-left"
-        alt=""
-        srcset=""
-      />
-      <img
-        src="/img/cross__background.svg"
-        class="background-illustration bottom-right"
-        alt=""
-        srcset=""
-      />
-      <div class="logo">
-        <img src="/img/cross.svg" class="logo__part" alt="" />
-        <img src="/img/circle.svg" class="logo__part" alt="" />
+    <main>
+      <div class="page homepage">
+        <img
+          src="/img/circle__background.svg"
+          class="background-illustration bottom-left"
+          alt=""
+          srcset=""
+        />
+        <img
+          src="/img/circle__background.svg "
+          class="background-illustration top-right"
+          alt=""
+          srcset=""
+        />
+        <img
+          src="/img/cross__background.svg"
+          class="background-illustration top-left"
+          alt=""
+          srcset=""
+        />
+        <img
+          src="/img/cross__background.svg"
+          class="background-illustration bottom-right"
+          alt=""
+          srcset=""
+        />
+        <div class="logo">
+          <img src="/img/cross.svg" class="logo__part" alt="" />
+          <img src="/img/circle.svg" class="logo__part" alt="" />
+        </div>
+        <ul class="menu">
+          <li class="menu__item">
+            <button class="play-btn next">
+              <img src="/img/play.svg" alt="" />
+              Play
+            </button>
+          </li>
+        </ul>
       </div>
-      <ul class="menu">
-        <li class="menu__item">
-          <button class="play-btn">
-            <img src="/img/play.svg" alt="" />
-            Play
+      <div class="page pawnpage">
+        <button class="previous-link">&lt; Go back</button>
+        <h2>Choose your pawn</h2>
+        <div class="pawn-selectors">
+          <button class="pawn-selector next">
+            <img src="/img/circle.svg" class="" id="circle-selector" alt="" />
           </button>
-        </li>
-      </ul>
-    </div>
-    <div class="page pawnpage">
-      <a href="#" class="previous-link"> &lt; Go back</a>
-      <h2>Choose your pawn</h2>
-      <div class="pawn-selectors">
-        <button class="pawn-selector">
-          <img src="/img/circle.svg" class="" id="circle-selector" alt="" />
-        </button>
-        <button class="pawn-selector">
-          <img src="/img/cross.svg" class="" id="cross-selector" alt="" />
-        </button>
+          <button class="pawn-selector next">
+            <img src="/img/cross.svg" class="" id="cross-selector" alt="" />
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="page gamepage">
-      <div class="modal-wrapper">
-        <div class="modal">
-          <div class="modal-header">
-            <button class="close-modal-btn">&times;</button>
-          </div>
-          <div class="modal-body">
-            <p class="winner">winner :</p>
-            <img src="" alt="" class="winner-pawn" />
-            <button class="reset">reset</button>
+      <div class="page gamepage">
+        <button class="previous-link">&lt; Go back</button>
+        <div class="modal-wrapper">
+          <div class="modal">
+            <div class="modal-header">
+              <button class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p class="winner">winner :</p>
+              <img src="" alt="" class="winner-pawn" />
+              <button class="reset">reset</button>
+            </div>
           </div>
         </div>
-      </div>
-      <a href="#" class="previous-link"> &lt; Go back</a>
-      <div class="game-wrapper">
-        <div class="board">
-          <button class="board-cell" data-cell-number="0"></button>
-          <button class="board-cell" data-cell-number="1"></button>
-          <button class="board-cell" data-cell-number="2"></button>
-          <button class="board-cell" data-cell-number="3"></button>
-          <button class="board-cell" data-cell-number="4"></button>
-          <button class="board-cell" data-cell-number="5"></button>
-          <button class="board-cell" data-cell-number="6"></button>
-          <button class="board-cell" data-cell-number="7"></button>
-          <button class="board-cell" data-cell-number="8"></button>
+        <div class="game-wrapper">
+          <div class="board">
+            <button class="board-cell" data-cell-number="0"></button>
+            <button class="board-cell" data-cell-number="1"></button>
+            <button class="board-cell" data-cell-number="2"></button>
+            <button class="board-cell" data-cell-number="3"></button>
+            <button class="board-cell" data-cell-number="4"></button>
+            <button class="board-cell" data-cell-number="5"></button>
+            <button class="board-cell" data-cell-number="6"></button>
+            <button class="board-cell" data-cell-number="7"></button>
+            <button class="board-cell" data-cell-number="8"></button>
+          </div>
+          <button class="reset">reset</button>
         </div>
-        <button class="reset">reset</button>
       </div>
-    </div>
+    </main>
+
     <script src="index.js"></script>
+    <script src="tictactoe.js"></script>
   </body>
 </html>
