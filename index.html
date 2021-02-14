@@ -1,39 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
+    <div class="page homepage">
+      <img
+        src="/img/circle__background.svg"
+        class="background-illustration bottom-left"
+        alt=""
+        srcset=""
+      />
+      <img
+        src="/img/circle__background.svg "
+        class="background-illustration top-right"
+        alt=""
+        srcset=""
+      />
+      <img
+        src="/img/cross__background.svg"
+        class="background-illustration top-left"
+        alt=""
+        srcset=""
+      />
+      <img
+        src="/img/cross__background.svg"
+        class="background-illustration bottom-right"
+        alt=""
+        srcset=""
+      />
+      <div class="logo">
+          <img src="/img/cross.svg" class="logo__part" alt="">
+          <img src="/img/circle.svg" class="logo__part" alt="">
+      </div>
+      <ul class="menu">
+        <li class="menu__item">
+          <button class="play-btn">
+              <img src="/img/play.svg" alt="">
+              Play
+            </button>
+        </li>
+      </ul>
+    </div>
     <div class="modal">
-        <div class="modal-header">
-            <button class="close-modal-btn">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p class="winner">winner : </p>
-            <img src="" alt="" class="winner-pawn">
-            <button class="reset">reset</button>
-        </div>
+      <div class="modal-header">
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="winner">winner :</p>
+        <img src="" alt="" class="winner-pawn" />
+        <button class="reset">reset</button>
+      </div>
     </div>
     <div class="game-wrapper">
-        <div class="board">
-            <button class="board-cell" data-cell-number="0"></button>
-            <button class="board-cell" data-cell-number="1"></button>
-            <button class="board-cell" data-cell-number="2"></button>
-            <button class="board-cell" data-cell-number="3"></button>
-            <button class="board-cell" data-cell-number="4"></button>
-            <button class="board-cell" data-cell-number="5"></button>
-            <button class="board-cell" data-cell-number="6"></button>
-            <button class="board-cell" data-cell-number="7"></button>
-            <button class="board-cell" data-cell-number="8"></button>
-        </div>
-        <button class="reset">reset</button>
+      <div class="board">
+        <button class="board-cell" data-cell-number="0"></button>
+        <button class="board-cell" data-cell-number="1"></button>
+        <button class="board-cell" data-cell-number="2"></button>
+        <button class="board-cell" data-cell-number="3"></button>
+        <button class="board-cell" data-cell-number="4"></button>
+        <button class="board-cell" data-cell-number="5"></button>
+        <button class="board-cell" data-cell-number="6"></button>
+        <button class="board-cell" data-cell-number="7"></button>
+        <button class="board-cell" data-cell-number="8"></button>
+      </div>
+      <button class="reset">reset</button>
     </div>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>
