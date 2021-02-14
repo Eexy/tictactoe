@@ -2,7 +2,8 @@ const board = document.querySelector('.board');
 const cells = document.querySelectorAll('.board-cell');
 const winner = document.querySelector('.winner-pawn');
 const resetBtn = document.querySelectorAll('.reset');
-const pawn = ['circle.svg', 'cross.svg'];
+const pawnSelectors = document.querySelectorAll('.pawn-selector');
+let pawn = ['circle.svg', 'cross.svg'];
 let ar = Array(9).fill(-1);
 let player = true;
 let isWin = false;
@@ -134,6 +135,16 @@ function reset() {
 const modal = document.querySelector('.modal-wrapper');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 closeModalBtn.addEventListener('click', closeModal);
+
+pawnSelectors.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    if(btn.getAttribute('id') === 'circle-selector'){
+      pawn = ['cross.svg','circle.svg'];  
+    }else{
+      pawn = ['circle.svg', 'cross.svg'];
+    }
+  })
+})
 
 // close modal
 function closeModal(){
