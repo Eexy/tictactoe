@@ -1,157 +1,148 @@
-const board = document.querySelector('.board');
-const cells = document.querySelectorAll('.board-cell');
-const winner = document.querySelector('.winner-pawn');
-const resetBtn = document.querySelectorAll('.reset');
-const pawnSelectors = document.querySelectorAll('.pawn-selector');
-let pawn = ['circle.svg', 'cross.svg'];
-let ar = Array(9).fill(-1);
-let player = true;
-let isWin = false;
-let draw = false;
+class Tictactoe {
+  constructor(_element, _pawns) {
+    this.element = _element;
+    this.cells = [..._element.querySelectorAll(".board-cell")];
+    this.board = Array(9).fill(-1);
+    this.playerTurn = 0;
+    this.pawns = _pawns;
+    this.reset = document.querySelectorAll('.reset');
 
-resetBtn.forEach(btn => {
-    btn.addEventListener('click', reset);
-})
+    this.handleClick = this.handleClick.bind(this);
 
-cells.forEach(cell => {
-    cell.addEventListener('click', play);
-});
+    this.cells.forEach((cell) =>
+      cell.addEventListener("click", this.handleClick)
+    );
 
-function play(e) {
-    const cell = e.target;
-    if (isEmpty(cell)) {
-        const pawnImg = document.createElement('img');
-        pawnImg.setAttribute('src', `img/${pawn[Number(player)]}`);
-        pawnImg.classList.add('pawn');
-        cell.appendChild(pawnImg);
-        const cellNumber = parseInt(cell.getAttribute('data-cell-number'));
-        ar[cellNumber] = Number(player);
-
-        checkBoard(cellNumber);
-
-        player = !player;
-    }
-}
-
-// stop the game by removing all the events on the cell
-function stopGame() {
-    cells.forEach(cell => {
-        cell.removeEventListener('click', play);
+    this.handleReset = this.handleReset.bind(this);
+    
+    this.reset.forEach((btn) => {
+      btn.addEventListener('click', this.handleReset);
     });
-}
+  }
 
-// check if it's win or it's draw
-function checkBoard(cellNumber) {
-    checkWin(cellNumber);
-    checkDraw();
+  handleClick(e) {
+    const currentCell = e.target;
 
-    // const winnerPawn = document.createElement('img');
-    if (isWin || draw) {
-        if(isWin){
-            winner.setAttribute('src', `img/${pawn[Number(player)]}`);
-        }else{
-            winner.setAttribute('src', `img/equal.svg`);
+    // Check if there is not already a pawn
+    if (this.isEmpty(currentCell)) {
+      const img = this.choosePawnImg();
+      currentCell.appendChild(img);
+
+      const cellIndex = this.getCellIndex(currentCell);
+      this.board[cellIndex] = this.playerTurn;
+
+      this.checkResult();
+
+      this.playerTurn = +!this.playerTurn;
+    }
+  }
+
+  // Check if there is a win or a draw
+  checkResult() {
+    if (this.checkWin()) {
+      return this.win();
+    } else if (this.checkDraw()) {
+      return this.draw();
+    }
+  }
+
+  win() {
+    const msg = `Player ${this.playerTurn} has win`;
+    const img = this.pawns[this.playerTurn];
+    this.setModal(msg, img);
+    this.showModal();
+  }
+
+  setModal(msg, img){
+    const resultMsg = document.querySelector('.result-msg');
+    resultMsg.textContent = msg;
+
+    const resultImg = document.querySelector('.result-img');
+    resultImg.setAttribute('src', `img/${img}`);
+  }
+
+  showModal(){
+    const modalWrapper = document.querySelector('.modal-wrapper');
+
+    modalWrapper.style.display = 'flex';
+  }
+
+  closeModal(){
+    const modalWrapper = document.querySelector('.modal-wrapper');
+    modalWrapper.style.display = 'none';
+  }
+
+  draw() {
+    const msg = 'Draw';
+    const img = 'equal.svg';
+    this.setModal(msg, img);
+    this.showModal();
+  }
+
+  // reset the game
+  handleReset(){
+    this.board = Array(9).fill(-1);
+    this.closeModal();
+
+    this.cells.forEach((cell) => {
+      const img = cell.querySelector('img');
+      if(img){
+        cell.removeChild(img);
+      }
+    });
+  }
+
+  checkWin() {
+    // all the winning combination
+    const possibleWinCombination = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 6, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    let isWin = false;
+
+    // We check if there is a winning combination
+    possibleWinCombination.forEach((combination) => {
+      let consecutiveCell = 0;
+      combination.forEach((cellIndex) => {
+        if (this.board[cellIndex] === this.playerTurn) {
+          ++consecutiveCell;
         }
-        stopGame();
-        showModal();
-    }
-}
+      });
 
-// check if a player has win
-function checkWin(cellNumber) {
-    row(cellNumber);
-    column(cellNumber);
-    diagonal();
-}
-
-// check if a row is full
-function row(cellNumber) {
-    const rowNumber = Math.floor(cellNumber / 3);
-    let n = 0;
-
-    ar.forEach((_, i) => {
-        if (Math.floor(i / 3) === rowNumber && ar[i] === ar[cellNumber]) {
-            ++n;
-        }
+      if (consecutiveCell === 3) {
+        isWin = true;
+      }
     });
 
-    if (n === 3) {
-        isWin = true;
-    }
-}
+    return isWin;
+  }
 
-// check if a column is full
-function column(cellNumber) {
-    const colNumber = cellNumber % 3;
-    let n = 0;
+  checkDraw() {
+    return this.board.every((cell) => cell !== -1);
+  }
 
-    ar.forEach((_, i) => {
-        if (i % 3 === colNumber && ar[i] === ar[cellNumber]) {
-            ++n;
-        }
-    });
+  choosePawnImg() {
+    const img = document.createElement("img");
+    img.setAttribute("src", `img/${this.pawns[this.playerTurn]}`);
+    img.classList.add("pawn");
 
-    if (n === 3) {
-        isWin = true;
-    }
-}
+    return img;
+  }
 
-// check diagonals
-function diagonal() {
-    const diag1 = [0, 4, 8].every(cell => ar[cell] === Number(player));
-    const diag2 = [2, 4, 6].every(cell => ar[cell] === Number(player));
+  getCellIndex(cell) {
+    return +cell.getAttribute("data-cell-number");
+  }
 
-    if (diag1 || diag2) {
-        isWin = true;
-    }
-}
+  isEmpty(cell) {
+    const cellIndex = +cell.getAttribute("data-cell-number");
 
-// check if it's a draw
-function checkDraw() {
-    draw = ar.every(cell => cell != -1);
-}
-
-// Check if a cell is empty
-function isEmpty(cell) {
-    return cell.textContent === '';
-}
-
-// reset game
-function reset() {
-    closeModal();
-    cells.forEach((cell) => {
-        cell.textContent = '';
-        cell.addEventListener('click', play);
-    });
-    ar = Array(9).fill(-1);
-
-    draw = false;
-    isWin = false;
-    player = true;
-
-    winner.textContent = '';
-}
-
-const modal = document.querySelector('.modal-wrapper');
-const closeModalBtn = document.querySelector('.close-modal-btn');
-closeModalBtn.addEventListener('click', closeModal);
-
-pawnSelectors.forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    if(btn.getAttribute('id') === 'circle-selector'){
-      pawn = ['cross.svg','circle.svg'];  
-    }else{
-      pawn = ['circle.svg', 'cross.svg'];
-    }
-  })
-})
-
-// close modal
-function closeModal(){
-    modal.style.display = 'none';
-}
-
-// show modal
-function showModal(){
-    modal.style.display = 'flex';
+    return this.board[cellIndex] === -1;
+  }
 }
